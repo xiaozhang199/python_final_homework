@@ -69,16 +69,16 @@ def down_file(url_list,url_name,file_path):
         for index,page in enumerate(pagelist):
             page_name = '%03d.jpg'%(index + 1)
             page_save_path = os.path.join(create_section_path, page_name)
-            with closing(requests.get(page, headers=head, stream=True)) as response:
-                chunk_size = 1024
-                content_size = int(response.headers['content-length'])
+            #一种良好的文件管理，接收和自动关闭流
+            with closing(requests.get(page, headers=head, stream=True)) as response:#stream 参数设置为True，推迟下载响应内容直到访问Response.content属性
+                chunk_size = 1024 #chunk_size:设置逐次迭代的数据大小
                 if response.status_code == 200:
                     with open(page_save_path, "wb") as file:
-                        for data in response.iter_content(chunk_size=chunk_size):
+                        for data in response.iter_content(chunk_size=chunk_size):#iter_content:逐次输出，防止一次性撑爆内存
                             file.write(data)
                 else:
                     print('无法正确写入图片')
-        time.sleep(2)
+        time.sleep(2)#爬一个章节，休息两秒，不要给对方服务器太大压力
 
 if __name__ == "__main__":
     main()
