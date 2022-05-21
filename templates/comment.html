@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="shortcut icon" href="#" />
+    <title>Comment</title>
+	<script src="/static/assets/js/echarts.min.js"></script>
+<!--mobile apps-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Scrutiny Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+	Smartphone Compatible web template, free Webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--mobile apps-->
+<!--Custom Theme files -->
+<link href="/static/assets/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="/static/assets/css/style.css" type="text/css" rel="stylesheet" media="all">
+<!-- //Custom Theme files -->
+<!-- /static/assets/js -->
+<script src="/static/assets/js/jquery-1.11.1.min.js"></script>
+<!-- ///static/assets/js -->
+<!--web-fonts-->
+<link href='http://fonts.useso.com/css?family=Stint+Ultra+Condensed' rel='stylesheet' type='text/css'>
+<link href='http://fonts.useso.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<!--//web-fonts-->
+<!--animate-->
+<link href="/static/assets/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="/static/assets/js/wow.min.js"></script>
+	<script>
+		 new WOW().init();
+	</script>
+<!--//end-animate-->
+<!-- start-smoth-scrolling-->
+<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){
+				event.preventDefault();
+
+		$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			});
+		});
+</script>
+<!--//end-smoth-scrolling-->
+</head>
+<body>
+	<!--services-->
+	<div class="welcome services" id="services">
+		<div class="container">
+			<h3 class="title wow fadeInDown animated" data-wow-delay=".5s">评论数量分析</h3>
+			<div class="services-info">
+				 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    			<div id="main" style="width: 900px;height:600px;"></div>
+				<script type="text/javascript">
+					// 基于准备好的dom，初始化echarts实例
+					var myChart = echarts.init(document.getElementById('main'));
+					var option = {
+						title: {
+							text: '视频评论数分析',
+							subtext: '数据来自爬虫'
+						},
+						tooltip: {
+							trigger: 'axis',
+							axisPointer: {
+								type: 'shadow'
+							}
+						},
+						legend: {
+							data: ['新华社']
+						},
+						grid: {
+							left: '3%',
+							right: '4%',
+							bottom: '3%',
+							containLabel: true
+						},
+						xAxis: {
+							type: 'value',
+							boundaryGap: [0, 0.01]
+						},
+						yAxis: {
+							type: 'category',
+							data: ['评论数1千以下','评论数1千到1万之间','评论数1万到10万之间','评论数10万以上']
+						},
+						series: [
+							{	color:['#00ABFF'],
+								type: 'bar',
+								data: {{datalist}}
+							}
+						]
+					};
+					// 使用刚指定的配置项和数据显示图表。
+					myChart.setOption(option);
+				</script>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

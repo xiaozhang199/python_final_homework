@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="shortcut icon" href="#" />
+    <title>Comment</title>
+	<script src="/static/assets/js/echarts.min.js"></script>
+<!--mobile apps-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Scrutiny Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+	Smartphone Compatible web template, free Webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--mobile apps-->
+<!--Custom Theme files -->
+<link href="/static/assets/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="/static/assets/css/style.css" type="text/css" rel="stylesheet" media="all">
+<!-- //Custom Theme files -->
+<!-- /static/assets/js -->
+<script src="/static/assets/js/jquery-1.11.1.min.js"></script>
+<!-- ///static/assets/js -->
+<!--web-fonts-->
+<link href='http://fonts.useso.com/css?family=Stint+Ultra+Condensed' rel='stylesheet' type='text/css'>
+<link href='http://fonts.useso.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<!--//web-fonts-->
+<!--animate-->
+<link href="/static/assets/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="/static/assets/js/wow.min.js"></script>
+	<script>
+		 new WOW().init();
+	</script>
+<!--//end-animate-->
+<!-- start-smoth-scrolling-->
+<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){
+				event.preventDefault();
+
+		$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			});
+		});
+</script>
+<!--//end-smoth-scrolling-->
+</head>
+<body>
+	<div class="welcome services" id="services">
+		<div class="container">
+			<table class="table table-striped">
+              <tr>
+                  <td>按更新时间排名</td>
+                  <td>视频标题</td>
+                  <td>评论数</td>
+                  <td>观看数</td>
+                  <td>硬币数</td>
+                  <td>弹幕数</td>
+                  <td>喜欢数</td>
+                  <td>分享数</td>>
+                  <td>收藏数<td>
+              </tr>
+
+              {% for video in videos %}
+              <tr>
+                  <td>{{video[0]}}</td>
+                  <td>
+                      <a href="{{ video[2] }}" target="_blank">
+                      {{ video[1] }}
+                        </a>
+                  </td>
+                  <td>{{video[3]}}</td>
+                  <td>{{video[4]}}</td>
+                  <td>{{video[5]}}</td>
+                  <td>{{video[6]}}</td>
+                  <td>{{video[7]}}</td>
+                  <td>{{video[8]}}</td>
+                  <td>{{video[9]}}</td>
+              </tr>
+              {% endfor %}
+          </table>
+			</script>
+		</div>
+	</div>
+</body>
+</html>

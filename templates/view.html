@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="shortcut icon" href="#" />
+    <title>Comment</title>
+	<script src="/static/assets/js/echarts.min.js"></script>
+<!--mobile apps-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Scrutiny Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+	Smartphone Compatible web template, free Webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--mobile apps-->
+<!--Custom Theme files -->
+<link href="/static/assets/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="/static/assets/css/style.css" type="text/css" rel="stylesheet" media="all">
+<!-- //Custom Theme files -->
+<!-- /static/assets/js -->
+<script src="/static/assets/js/jquery-1.11.1.min.js"></script>
+<!-- ///static/assets/js -->
+<!--web-fonts-->
+<link href='http://fonts.useso.com/css?family=Stint+Ultra+Condensed' rel='stylesheet' type='text/css'>
+<link href='http://fonts.useso.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<!--//web-fonts-->
+<!--animate-->
+<link href="/static/assets/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="/static/assets/js/wow.min.js"></script>
+	<script>
+		 new WOW().init();
+	</script>
+<!--//end-animate-->
+<!-- start-smoth-scrolling-->
+<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){
+				event.preventDefault();
+
+		$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			});
+		});
+</script>
+<!--//end-smoth-scrolling-->
+</head>
+<body>
+	<!--services-->
+	<div class="welcome services" id="services">
+		<div class="container">
+			<h3 class="title wow fadeInDown animated" data-wow-delay=".5s">播放数量分析</h3>
+			<div class="services-info">
+				 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    			<div id="main" style="width: 1150px;height:600px;"></div>
+				<script type="text/javascript">
+					// 基于准备好的dom，初始化echarts实例
+					var myChart = echarts.init(document.getElementById('main'));
+					var option = {
+						title: {
+							text: '数据播放量分布',
+							left: 'center',
+							top: 20,
+							textStyle: {
+								color: 'white'
+							}
+						},
+
+						grid:{
+							x:600,
+							y:65,
+							x2:685,
+							y2:40,
+							borderWidth:1
+						},
+
+						tooltip: {
+							trigger: 'item',
+							formatter: '{a} <br/>{b} : {c} ({d}%)'
+						},
+
+						visualMap: {
+							show: false,
+							min: 80,
+							max: 600,
+							inRange: {
+								colorLightness: [0, 1]
+							}
+						},
+						series: [
+							{
+								name: '访问来源',
+								type: 'pie',
+								radius: '60%',
+								center: ['50%', '50%'],
+								data: [
+									{value: {{datalist[0]}}, name: '播放量10万以下'},
+									{value: {{datalist[1]}}, name: '播放量10万至30万'},
+									{value: {{datalist[2]}}, name: '播放量30万至50万'},
+									{value: {{datalist[3]}}, name: '播放量50万至100万'},
+									{value: {{datalist[4]}}, name: '播放量100万以上'}
+								].sort(function (a, b) { return a.value - b.value; }),
+								roseType: 'radius',
+								label: {
+									color: 'white'
+								},
+								labelLine: {
+									lineStyle: {
+										color: 'yellow'
+									},
+									smooth: 0.2,
+									length: 10,
+									length2: 20
+								},
+								itemStyle: {
+									color:'blue',
+									shadowBlur: 200,
+									shadowColor: 'rgba(255, 255, 255, 0.3)'
+								},
+
+								animationType: 'scale',
+								animationEasing: 'elasticOut',
+								animationDelay: function (idx) {
+									return Math.random() * 200;
+								}
+							}
+						]
+					};
+					// 使用刚指定的配置项和数据显示图表。
+					myChart.setOption(option);
+				</script>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
