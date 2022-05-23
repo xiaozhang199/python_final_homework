@@ -25,7 +25,7 @@ cur.close()
 link.close()
 
 cut = jieba.cut(text)
-string = ' '.join(cut)
+content = ' '.join(cut)
 
 img = Image.open(r'.\static\assets\images\cloud.jpg') #打开图片
 img_array = np.array(img)#将图片转换为图片数组
@@ -33,8 +33,7 @@ wc = WordCloud(
         background_color = "white",
         mask = img_array,
         font_path = "STFANGSO.TTF"
-)
-wc.generate_from_text(string)
+).generate_from_text(content)
 
 # #绘制图片
 plt.imshow(wc)#其中wc为要处理的图像及数组，处理图像，对传入的数组或者图像进行处理并显示格式
