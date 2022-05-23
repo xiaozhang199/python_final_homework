@@ -57,7 +57,7 @@ def comment():
         charset='utf8mb4')
     cur = link.cursor()
     sql = "SELECT COUNT(*) FROM up_infomation WHERE comment_num < 1000"
-    cur.execute(sql)  # 这里不是运行出来的文件，是运行的行数
+    cur.execute(sql)  
     data = cur.fetchall()
     for nums in data:
         for num in nums:
@@ -97,7 +97,7 @@ def view():
         charset='utf8mb4')
     cur = link.cursor()
     sql = "SELECT COUNT(*) FROM up_infomation WHERE view_num < 100000"
-    cur.execute(sql)  # 这里不是运行出来的文件，是运行的行数
+    cur.execute(sql)  
     data = cur.fetchall()
     for nums in data:
         for num in nums:
@@ -142,7 +142,7 @@ def share():
         charset='utf8mb4')
     cur = link.cursor()
     sql = "select * from up_infomation ORDER BY share_num DESC LIMIT 10"
-    cur.execute(sql)  # 这里不是运行出来的文件，是运行的行数
+    cur.execute(sql)  
     data = cur.fetchall()
     for item in data:
         datalist.append(list(item))
