@@ -1,29 +1,28 @@
 import requests
 import json
-from lxml import etree
 import time
+from lxml import etree
 import pymysql
 
 def get_data():
     space_url = 'https://space.bilibili.com/473837611'#个人空间链接-->新华社的数据
     search_url = 'https://api.bilibili.com/x/space/arc/search'#我们搜索时展现的信息链接
-    mid = space_url.split('/')[-1]#个人空间标志
+    mid = 473837611#个人空间标志
 
     #requests库的session对象能够帮我们跨请求保持某些参数，也会在同一个session实例发出的所有请求之间保持cookies。
     sess = requests.Session()
     search_headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
-        'Accept-Language': 'zh-CN,zh;q=0.9',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
         'Accept-Encoding': 'gzip, deflate, br',
         'Accept': 'application/json, text/plain, */*'}#头文件参数尽可能多写
-    ps = 30
     datalist = []
     for pn in range(1, 11):
         search_params = {'mid': mid,
-                         'ps': ps,
+                         'ps': 30,
                          'tid': 0,
                          'pn': pn}
-        req = sess.get(url=search_url, headers=search_headers, params=search_params, verify=False)
+        req = sess.get(url=search_url, headers=search_headers, params=search_params, verify=False)#verify = False:避免ssl认证
         info = json.loads(req.text)#b站的数据是用json形式存储的
         vlist = info['data']['list']['vlist']
         for video in vlist:
@@ -38,21 +37,21 @@ def get_data():
             view_num = video['play']#观看数量
             data.append(view_num)
             time.sleep(1)#及时休眠，不要给对方服务器太大压力
-            video_response = sess.get(url=video_url, headers=search_headers, verify=False).content#lxml文件更容错性更高
-            selector = etree.HTML(video_response)#通过xpath找出每个要提取的信息
-            coin_span = selector.xpath("//span[@class='coin']")
-            coin_num = coin_span[0].xpath("text()")[0].strip(' ').strip('\n').strip(' ')  # 硬币数量
+            video_response = sess.get(url=video_url, headers=search_headers, verify=False).content
+            html = etree.HTML(video_response)#通过xpath找出每个要提取的信息，将传进去的字符转换为Element对象
+            coin_span = html.xpath(r'/html/body/div[2]/div[4]/div[1]/div[3]/div[1]/span[2]')
+            coin_num = coin_span[0].xpath("text()")[0].strip('\n').strip(' ').strip('\n')  # 硬币数量
             data.append(coin_num)
-            dm_span = selector.xpath("//span[@class='dm']")
+            dm_span = html.xpath("//span[@class='dm']")
             dm_num = dm_span[0].xpath("text()")[0].strip(' ').strip('\n')  # 弹幕数量
             data.append(dm_num)
-            like_span = selector.xpath("//span[@class='like']")
+            like_span = html.xpath(r'/html/body/div[2]/div[4]/div[1]/div[3]/div[1]/span[1]')
             like_num = like_span[0].xpath("text()")[0].strip(' ').strip('\n')  # 喜欢数量
             data.append(like_num)
-            share_span = selector.xpath("//span[@class='share']")
+            share_span = html.xpath(r"/html/body/div[2]/div[4]/div[1]/div[3]/div[1]/span[4]")
             share_num = share_span[0].xpath("text()")[0].strip(' ').strip('\n')  # 分享数量
             data.append(share_num)
-            collect_span = selector.xpath("//span[@class='collect']")
+            collect_span = html.xpath(r"/html/body/div[2]/div[4]/div[1]/div[3]/div[1]/span[3]")
             collect_num = collect_span[0].xpath("text()")[0].strip(' ').strip('\n')  # 收藏数量
             data.append(collect_num)
             datalist.append(data)
