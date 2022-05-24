@@ -63,7 +63,7 @@ def init_db():
         host='localhost',
         port=3306,
         user='root',
-        password='zyx18080623585',
+        password='*********',
         database='crawldata',
         charset='utf8mb4')
 
@@ -103,7 +103,7 @@ def savedata(datalist):
             host='localhost',
             port=3306,
             user='root',
-            password='zyx18080623585',
+            password='********',
             database='crawldata',
             charset='utf8mb4')
     cur = link.cursor()
