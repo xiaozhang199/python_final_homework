@@ -27,7 +27,7 @@ def movie():
         host='localhost',
         port=3306,
         user='root',
-        password='zyx18080623585',
+        password='**********',
         database='crawldata',
         charset='utf8mb4')
     cur = link.cursor()
@@ -52,7 +52,7 @@ def comment():
         host='localhost',
         port=3306,
         user='root',
-        password='zyx18080623585',
+        password='********',
         database='crawldata',
         charset='utf8mb4')
     cur = link.cursor()
@@ -92,7 +92,7 @@ def view():
         host='localhost',
         port=3306,
         user='root',
-        password='zyx18080623585',
+        password='*********',
         database='crawldata',
         charset='utf8mb4')
     cur = link.cursor()
@@ -137,7 +137,7 @@ def share():
         host='localhost',
         port=3306,
         user='root',
-        password='zyx18080623585',
+        password='********',
         database='crawldata',
         charset='utf8mb4')
     cur = link.cursor()
